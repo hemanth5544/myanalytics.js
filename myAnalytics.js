@@ -1,4 +1,3 @@
-// myAnalytics.js
 (function() {
     function isSpeechRecognitionSupported() {
         return new Promise((resolve) => {
@@ -9,12 +8,7 @@
 
     async function collectData() {
         const speechRecognitionSupported = await isSpeechRecognitionSupported();
-        if (speechRecognitionSupported) {
-            console.log('yes');
-        } else {
-            console.log('no');
-        }
-        console.log(speechRecognitionSupported);
+        console.log('Speech Recognition Supported:', speechRecognitionSupported); // Add this line
 
         // Add more data collection logic here
         const data = {
@@ -22,13 +16,17 @@
             // Add other data you want to collect
         };
 
-        // Send data to your server
+        // Send data to your local server
         fetch('http://localhost:3000/collect', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(data),
+        }).then(response => {
+            console.log('Data sent successfully:', data); // Add this line
+        }).catch(error => {
+            console.error('Error sending data:', error); // Add this line
         });
     }
 
