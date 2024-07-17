@@ -1,19 +1,13 @@
 (function() {
-    function isSpeechRecognitionSupported() {
-        return new Promise((resolve) => {
-            const speechRecognitionSupported = 'SpeechRecognition' in window || 'webkitSpeechRecognition' in window;
-            resolve(speechRecognitionSupported);
-        });
-    }
-
     async function collectData() {
-        const speechRecognitionSupported = await isSpeechRecognitionSupported();
-        console.log('Speech Recognition Supported:', speechRecognitionSupported); // Add this line
+        // Collect memory information
+        const memory = navigator.deviceMemory || 'Unknown';
+        console.log(`This device has at least ${memory}GiB of RAM.`);
 
-        // Add more data collection logic here
+        // Create the data object
         const data = {
-            speechRecognitionSupported,
-            // Add other data you want to collect
+            memory,
+            // Add other data you want to collect here
         };
 
         // Send data to your local server
@@ -24,9 +18,9 @@
             },
             body: JSON.stringify(data),
         }).then(response => {
-            console.log('Data sent successfully:', data); // Add this line
+            console.log('Data sent successfully:', data);
         }).catch(error => {
-            console.error('Error sending data:', error); // Add this line
+            console.error('Error sending data:', error);
         });
     }
 
