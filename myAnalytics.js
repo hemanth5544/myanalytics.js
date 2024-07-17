@@ -23,7 +23,7 @@
         };
 
         // Send data to your server
-        fetch('https://your-server.com/collect', {
+        fetch('http://localhost:3000/collect', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
